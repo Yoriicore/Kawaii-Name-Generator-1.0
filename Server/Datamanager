@@ -1,1 +1,50 @@
+local DataManager = {}
 
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+
+-- Store profiles from ProfileStore
+DataManager.Profiles = {}
+
+
+
+function DataManager.AddGold(player: Player, amount: number)
+	local profile = DataManager.Profiles[player]
+	if not profile then return end
+	
+	profile.Data.Gold += amount
+	player.leaderstats.Gold.Value = profile.Data.Gold
+	ReplicatedStorage.Gold.UpdateGold:FireClient(player, profile.Data.Gold)
+end
+
+
+function DataManager.AddGems(player: Player, amount: number)
+	local profile = DataManager.Profiles[player]
+	if not profile then return end
+
+	profile.Data.Gems += amount
+	player.leaderstats.Gems.Value = profile.Data.Gems
+	ReplicatedStorage.UpdateGems:FireClient(player, profile.Data.Gems)
+end
+
+function DataManager.AddNames(player: Player, amount: number)
+	local profile = DataManager.Profiles[player]
+	if not profile then return end
+
+	profile.Data.Names += amount
+	player.leaderstats.Names.Value = profile.Data.Names
+	ReplicatedStorage.Names.UpdateNames:FireClient(player, profile.Data.Names)
+end
+
+function DataManager.SubtractNames(player: Player, amount: number)
+	local profile = DataManager.Profiles[player]
+	if not profile then return end
+	
+	profile.Data.Names -= amount
+	
+	player.leaderstats.Names.Value = profile.Data.Names
+	ReplicatedStorage.Names.UpdateNames:FireClient(player, profile.Data.Names)
+end
+
+
+return DataManager
