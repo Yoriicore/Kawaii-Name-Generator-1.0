@@ -1,0 +1,16 @@
+--// A module script Template for your Main Stats & Inventory. This is where all your data will be stored and saved
+return {
+	Gold = 10,
+	Names = 0,
+	Gems = 5,
+	
+	Honor = 100,
+	
+	Inventory = {},
+	
+	Settings = {
+		Music = true,
+		SFX = true,
+		Volume = 1,
+	},
+}
